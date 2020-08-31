@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add delivery</title>
+    <link rel="stylesheet" th:href="@{/css/pattern.css}">
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/js/pattern.js}"></script>
+</head>
+<body>
+<nav>
+    <article class="menu-holder">
+        <h1 id="logo"><span>In</span>Time</h1>
+        <section class="menu-buttons-holder">
+            <button class="oval-button" onclick="openPage('')">Menu</button>
+            <button class="oval-button" onclick="openPage('add_delivery')">Add delivery</button>
+            <button class="oval-button" onclick="openPage('add_package')">Add package</button>
+            <button class="oval-button" onclick="openPage('add_good')">Add good</button>
+        </section>
+    </article>
+</nav>
+<article id="allHolder">
+    <section id="contentHolder">
+        <h1 class="header" th:switch="${error != null}">
+            <span th:case="true" th:text="${error}"></span>
+            <span th:case="*">Add Delivery</span>
+        </h1>
+        <form action="#" th:action="@{/saveDelivery}" th:object="${delivery}" method="POST">
+            <section class="good-holder">
+                <input type="hidden" th:field="*{id}">
+                <p class="input-header">Start city</p>
+                <input th:field="*{fromCity}" class="input-text" type="text" required>
+
+                <p class="input-header">Destination city</p>
+                <input th:field="*{toCity}" class="input-text" type="text" required>
+
+                <p class="input-header">Departure Time</p>
+                <input name="departure" class="input-text" type="datetime-local" required>
+
+                <p class="input-header">Arrival Time</p>
+                <input name="arrival" class="input-text" type="datetime-local" required>
+
+                <p class="input-header">Transport</p>
+                <select name="transportId" class="input-text selector" required>
+                    <option disabled selected value>Select Transport</option>
+                    <option
+                            th:each="transport : ${transports}"
+                            th:value="${transport.getId()}"
+                            th:text="${transport.getInfo()}">
+                    </option>
+                </select>
+                <section id="checkboxHolder">
+                    <label for="delivered" class="lime">Delivered:</label>
+                    <input id="delivered" th:field="*{delivered}" type="checkbox">
+                </section>
+            </section>
+
+            <button class="oval-button" type="submit">Add delivery</button>
+        </form>
+
+    </section>
+</article>
+</body>
+</html>

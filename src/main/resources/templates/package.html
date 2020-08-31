@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Package</title>
+    <link rel="stylesheet" th:href="@{/css/pattern.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/js/pattern.js}"></script>
+</head>
+<body>
+<nav>
+    <article class="menu-holder">
+        <h1 id="logo"><span>In</span>Time</h1>
+        <section class="menu-buttons-holder">
+            <button class="oval-button" onclick="openPage('')">Menu</button>
+            <button class="oval-button" onclick="openPage('add_delivery')">Add delivery</button>
+            <button class="oval-button" onclick="openPage('add_package')">Add package</button>
+            <button class="oval-button" onclick="openPage('add_good')">Add good</button>
+        </section>
+    </article>
+</nav>
+<article id="allHolder">
+    <section id="contentHolder">
+        <p class="header">
+            Total goods in package: <span class="header" th:text="${pack.getCopyContainsGoods().size()}"></span>
+        </p>
+        <article class="show-data">
+            <p class="header lime">Package</p>
+            <p class="sub-header">Package number: <span class="lime" th:text="${pack.getPackageNumber()}"></span></p>
+            <p class="sub-header">Address: <span class="lime" th:text="${pack.getAddress()}"></span></p>
+            <p class="sub-header">Sender: <span class="lime" th:text="${pack.getDeliverFrom().getFullName()}"></span></p>
+            <p class="sub-header">Receiver: <span class="lime" th:text="${pack.getDeliverTo().getFullName()}"></span></p>
+        </article>
+        <article class="table-holder">
+            <p class="header lime">Goods</p>
+            <table>
+                <thead>
+                <tr>
+                    <td>Title</td>
+                    <td>Weight</td>
+                    <td>Volume</td>
+                    <td>Good price</td>
+                    <td>Delivery price</td>
+                    <td>Warehouse</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="good : ${pack.getCopyContainsGoods()}">
+                    <td th:text="${good.getTitle()}"></td>
+                    <td th:text="${good.getWeight()}"></td>
+                    <td th:text="${good.getVolume()}"></td>
+                    <td th:text="${good.getGoodPrice()}"></td>
+                    <td th:text="${good.getDeliveryPrice()}"></td>
+                    <td th:switch="${good.getWarehouse() != null}">
+                        <a th:case="${true}" th:text="${good.getWarehouse().getAddressAndLoad()}"></a>
+                        <a th:case="*">Not yet assigned</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </article>
+    </section>
+</article>
+</body>
+</html>

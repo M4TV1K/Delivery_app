@@ -8,11 +8,11 @@
 		<version>2.2.2.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.mindhunter.springboot</groupId>
+	<groupId>matvik</groupId>
 	<artifactId>thymeleafdemo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>CRM-Spring-Boot-Thymeleaf</name>
-	<description>Demo project for Spring Boot</description>
+	<name>FINAL_PROJECT</name>
+	<description>MAS FINAL PROJECT</description>
 
 	<properties>
 		<java.version>1.8</java.version>
@@ -53,6 +53,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
 	</dependencies>
 
 	<build>

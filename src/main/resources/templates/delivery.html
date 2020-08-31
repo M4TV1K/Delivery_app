@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Delivery</title>
+    <link rel="stylesheet" th:href="@{/css/pattern.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/js/pattern.js}"></script>
+</head>
+<body>
+    <nav>
+        <article class="menu-holder">
+            <h1 id="logo"><span>In</span>Time</h1>
+            <section class="menu-buttons-holder">
+                <button class="oval-button" onclick="openPage('')">Menu</button>
+                <button class="oval-button" onclick="openPage('add_delivery')">Add delivery</button>
+                <button class="oval-button" onclick="openPage('add_package')">Add package</button>
+                <button class="oval-button" onclick="openPage('add_good')">Add good</button>
+            </section>
+        </article>
+    </nav>
+    <article id="allHolder">
+        <section id="contentHolder">
+            <p class="header">
+                Total packages in delivery: <span class="header" th:text="${delivery.getCopyPackages().size()}"></span>
+            </p>
+            <article class="show-data">
+                <p class="header lime">Delivery</p>
+                <p class="sub-header">Start city: <span class="lime" th:text="${delivery.getFromCity()}"></span></p>
+                <p class="sub-header">Destination city: <span class="lime" th:text="${delivery.getToCity()}"></span></p>
+                <p class="sub-header">Departure time: <span class="lime" th:text="${delivery.getDepartureTime().format(formatter)}"></span></p>
+                <p class="sub-header">Arrival time: <span class="lime" th:text="${delivery.getArrivalTime().format(formatter)}"></span></p>
+                <p class="sub-header" th:switch="${delivery.isDelivered()}">
+                    Delivered:
+                    <span th:case="${true}" class="lime">Yes</span>
+                    <span th:case="*">No <a class="update-link" th:href="@{/mark_delivery/{id}(id=${delivery.getId()})}">Mark as delivered</a></span>
+                </p>
+                <p class="sub-header" th:switch="${delivery.getTransport() != null}">
+                    Transport:
+                    <span th:case="${true}" th:text="${delivery.getTransportAndFreeSpace()}" class="lime"></span>
+                    <span th:case="*">Not yet assigned</span>
+                </p>
+            </article>
+            <article class="table-holder">
+                <p class="header lime">Packages</p>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Package number</td>
+                        <td>Shipment address</td>
+                        <td>Sender</td>
+                        <td>Receiver</td>
+                        <td>Actions</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="pack : ${delivery.getCopyPackages()}">
+                        <td th:text="${pack.getPackageNumber()}"></td>
+                        <td th:text="${pack.getAddress()}"></td>
+                        <td th:text="${pack.getDeliverFrom().getFullName()}"></td>
+                        <td th:text="${pack.getDeliverTo().getFullName()}"></td>
+                        <td><a th:href="@{/package/{id}(id=${pack.getId()})}">Show</a></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </article>
+        </section>
+    </article>
+</body>
+</html>

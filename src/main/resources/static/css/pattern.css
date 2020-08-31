@@ -1,0 +1,166 @@
+
+body, html {
+    margin: 0;
+    background-color: #E6FBD9;
+}
+
+h1, h2, p, td, button, input, select, option {
+    font-family: sans-serif;
+}
+
+nav {
+    margin-top: 3vw;
+    display: flex;
+    justify-content: center;
+}
+.menu-holder {
+    width: 94vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-buttons-holder {
+    width: 46vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+#logo , #logo > span {
+    font-weight: normal;
+    font-size: 3.5vw;
+    margin: 0;
+}
+#logo > span, .lime {
+    color: #7AF300;
+}
+
+.header {
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    font-size: 1.5vw;
+    font-weight: normal;
+}
+
+.value-name {
+    width: 10vw;
+    font-size: 1.25vw;
+    text-align: center;
+}
+
+.input-header {
+    text-align: center;
+    margin-top: 1vw;
+    margin-bottom: 0;
+    color: #73e600;
+    font-size: 1.1vw;
+}
+
+.input-header:first-child {
+    margin-top: 0;
+}
+
+.input-text {
+    margin-top: 0.5vw;
+    width: 15vw;
+    height: 2vw;
+    font-size: 1vw;
+    color: #73e600;
+    outline-color: #73e600;
+    border: 1.5px solid black;
+    text-align: center;
+    background-color: transparent;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.oval-button {
+    outline: none;
+    border-radius: 100px;
+    width: 10vw;
+    height: 3vw;
+    border: none;
+    color: white;
+    background-color: #7AF300;
+    font-weight: bold;
+    cursor: pointer;
+}
+.oval-button:hover {
+    color: #7AF300;
+    background-color: white;
+}
+::placeholder {
+    color: #73e600;
+}
+.selector {
+    margin-top: 0.5vw;
+}
+
+.oval-button {
+    margin-top: 6.5vh;
+}
+
+.menu-buttons-holder > .oval-button {
+    margin-top: 0;
+    font-size: 1.1vw;
+    height: 2.5vw;
+    font-weight: 300;
+}
+
+#allHolder {
+    display: flex;
+    justify-content: center;
+}
+
+#contentHolder {
+    width: 70vw;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.table-holder {
+    width: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.table-holder > .header {
+    font-size: 2.5vw;
+}
+
+table {
+    border-collapse: collapse;
+    margin-top: 2.5vh;
+    margin-bottom: 5vh;
+}
+
+td {
+    border: 2px solid #FFFFFF;
+    background-color: #73e600;
+    color: #FFFFFF;
+    font-size: 1vw;
+    padding: 1.3vw 1vw;
+    font-weight: 300;
+    max-width: 14vw;
+}
+
+thead > tr > td {
+    font-weight: bold;
+}
+
+.update-link:link {
+    color: #7AF300;
+}
+
+a:link {
+    color: #FFFFFF;
+}
+a:visited {
+    color: black;
+}
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Add delivery</title>
+    <link rel="stylesheet" th:href="@{/css/pattern.css}">
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script th:src="@{/js/pattern.js}"></script>
+</head>
+<body>
+<nav>
+    <article class="menu-holder">
+        <h1 id="logo"><span>In</span>Time</h1>
+        <section class="menu-buttons-holder">
+            <button class="oval-button" onclick="openPage('')">Menu</button>
+            <button class="oval-button" onclick="openPage('add_delivery')">Add delivery</button>
+            <button class="oval-button" onclick="openPage('add_package')">Add package</button>
+            <button class="oval-button" onclick="openPage('add_good')">Add good</button>
+        </section>
+    </article>
+</nav>
+<article id="allHolder">
+    <section id="contentHolder">
+        <h1 class="header" th:switch="${error != null}">
+            <span th:case="true" th:text="${error}"></span>
+            <span th:case="*">Add Good</span>
+        </h1>
+        <form action="#" th:action="@{/saveGood}" th:object="${good}" method="POST">
+            <section class="good-holder">
+                <input type="hidden" th:field="*{id}">
+                <p class="input-header">Title</p>
+                <input th:field="*{title}" class="input-text" type="text" required>
+
+                <p class="input-header">Weight</p>
+                <input th:field="*{weight}" class="input-text" type="number" step="0.01" required>
+
+                <p class="input-header">Volume</p>
+                <input th:field="*{volume}" class="input-text" type="number" step="0.01" required>
+
+                <p class="input-header">Good Price</p>
+                <input th:field="*{goodPrice}" class="input-text" type="number" required>
+
+                <p class="input-header">Warehouse</p>
+                <select name="warehouse" class="input-text selector" required>
+                    <option disabled selected value>Select Warehouse</option>
+                    <option
+                            th:each="warehouse : ${warehouses}"
+                            th:value="${warehouse.getId()}"
+                            th:text="${warehouse.getAddressAndLoad()}">
+                    </option>
+                </select>
+
+                <p class="input-header">Package</p>
+                <select name="package" class="input-text selector" required>
+                    <option disabled selected value>Select Package</option>
+                    <option
+                            th:each="pack : ${packages}"
+                            th:value="${pack.getId()}"
+                            th:text="${pack.getAddressAndReceiver()}">
+                    </option>
+                </select>
+            </section>
+
+            <button class="oval-button" type="submit">Add good</button>
+        </form>
+
+    </section>
+</article>
+</body>
+</html>

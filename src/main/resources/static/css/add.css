@@ -1,0 +1,17 @@
+
+#contentHolder, form, .good-holder {
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+}
+
+.header {
+    margin-top: 2vw;
+    margin-bottom: 0;
+}
+
+#checkboxHolder {
+    margin-top: 1vw;
+    display: flex;
+    align-items: center;
+}
