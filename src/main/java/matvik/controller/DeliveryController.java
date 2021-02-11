@@ -1,25 +1,18 @@
 package matvik.controller;
 
 import matvik.entity.Delivery.Delivery;
+import matvik.entity.Delivery.Good;
 import matvik.entity.Delivery.Package;
-import matvik.entity.Transport.Boat;
-import matvik.entity.Transport.Plane;
 import matvik.entity.Transport.Transport;
-import matvik.entity.Transport.Truck;
 import matvik.service.DeliveryServiceImpl;
-import matvik.service.PackageServiceImpl;
+import matvik.service.GoodServiceImpl;
 import matvik.service.TransportServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
-import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class DeliveryController {
@@ -27,6 +20,8 @@ public class DeliveryController {
     DeliveryServiceImpl deliveryService;
     @Autowired
     TransportServiceImpl transportService;
+    @Autowired
+    GoodServiceImpl goodService;
 
     @GetMapping("/add_delivery")
     public String createDelivery(Model thModel) {
@@ -101,6 +96,12 @@ public class DeliveryController {
     public String markDelivery(@PathVariable String id) {
         Delivery delivery = deliveryService.findById(Integer.parseInt(id));
         delivery.setDelivered(true);
+        for (Package pack : delivery.getCopyPackages()) {
+            for (Good good : pack.getCopyContainsGoods()) {
+                good.getWarehouse().removeGood(good);
+                goodService.save(good);
+            }
+        }
         deliveryService.save(delivery);
         return "redirect:/delivery/" + id;
     }

@@ -54,7 +54,12 @@
                     <td th:text="${good.getDeliveryPrice()}"></td>
                     <td th:switch="${good.getWarehouse() != null}">
                         <a th:case="${true}" th:text="${good.getWarehouse().getAddressAndLoad()}"></a>
-                        <a th:case="*">Not yet assigned</a>
+                        <a th:case="*">
+                            <a th:switch="${good.getMyPackage().getDelivery().isDelivered()}">
+                                <span th:case="${true}">Already delivered</span>
+                                <span th:case="*">Not yet assigned</span>
+                            </a>
+                        </a>
                     </td>
                 </tr>
                 </tbody>

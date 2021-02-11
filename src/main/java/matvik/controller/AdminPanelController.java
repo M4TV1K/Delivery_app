@@ -5,6 +5,7 @@ import matvik.entity.Delivery.Good;
 import matvik.entity.Delivery.Package;
 import matvik.entity.People.Customer;
 import matvik.service.DeliveryServiceImpl;
+import matvik.service.GoodServiceImpl;
 import matvik.service.PackageServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,9 +23,22 @@ public class AdminPanelController {
     DeliveryServiceImpl deliveryService;
     @Autowired
     PackageServiceImpl packageService;
+    @Autowired
+    GoodServiceImpl goodService;
 
     @GetMapping("/")
     public String adminPanel(Model thModel) {
+        /*List<Delivery> deliveries = deliveryService.findAll();
+        for (Delivery delivery : deliveries) {
+            for (Package pack : delivery.getCopyPackages()) {
+                for (Good good : pack.getCopyContainsGoods()) {
+                    System.out.println(good.getTitle() + " " + good.getWarehouse().getAddressAndLoad());
+                    good.getWarehouse().removeGood(good);
+                    goodService.save(good);
+                }
+            }
+        }*/
+
         List<Delivery> deliveryList = deliveryService.findAll();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         thModel.addAttribute("formatter", formatter);
