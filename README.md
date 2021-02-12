@@ -9,3 +9,6 @@ As the Hibernate allows to use CodeFirst approach for the database, the generate
 
 ### Frontend
 ThymeLeaf templates are being used here with a bit of CSS
+
+## UML
+There is MAS_12c_Matviichuk_Roman_s17347.pdf file which contains UML Diagrams such as Use Case Diagram, Analytical Class Diagram, Design Class Diagram, Activity Diagram, State Diagram and Sequence Diagram. They describing the whole structure of the project including workflow and the way models (entities) related to each other, because there is a lot of inheritance.
